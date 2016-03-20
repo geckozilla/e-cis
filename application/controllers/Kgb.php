@@ -7,8 +7,9 @@ class kgb extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate");
-        if (!$this->ion_auth->logged_in()) {
-            red('user/login');
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->in_group('kgb')) {
+            red(base_url('user/login'));
+            die();
         }
     }
 
@@ -98,6 +99,8 @@ class kgb extends CI_Controller {
         $id_kgb = $this->uri->segment(4);
         $data['header'] = 'Kenaikan Gaji Berkala';
         $data['tema'] = 'primary';
+        $this->load->model('model_golongan');
+        $data['data_golongan'] = $this->model_golongan->view();
         if ($id_kgb > 0) {
             $data['data'] = $this->model_kgb->select($id_kgb);
             $data['mode'] = 'edit';

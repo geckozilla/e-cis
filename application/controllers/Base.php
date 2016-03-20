@@ -8,13 +8,16 @@ class base extends CI_Controller {
         parent::__construct();
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate");
         if (!$this->ion_auth->logged_in()) {
-            red('user');
+            red(base_url('user/login'));
+            die();
         }
         $this->lang->load('auth');
     }
 
     public function index() {
-        $this->home();
+        if ($this->ion_auth->logged_in()) {
+            $this->home();
+        }
     }
 
     public function home() {
@@ -31,6 +34,5 @@ class base extends CI_Controller {
         $data['header'] = 'Maintenance';
         $this->load->view('page/v-maintenance', $data);
     }
-
 
 }

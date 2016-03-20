@@ -7,37 +7,49 @@
         </div>
     </div>
     <div class="panel-body">
-        <table id="datatables" class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Jenis</th>
-                    <th>Nomor SK</th>
-                    <th>Tanggal SK</th>
-                    <th width="15%">Aksi</th>
-                </tr>
-            </thead>
-            <?php
-            if (!empty($data_slks)) {
-                foreach ($data_slks as $slks) {
-                    echo "<tr>";
-                    echo "<td>" . $slks->masa_kerja . " tahun</td>";
-                    echo "<td>" . ($slks->no_sk == '' ? '-' : $slks->no_sk) . "</td>";
-                    echo "<td>" . $slks->tgl_sk . "</td>";
-                    echo "<td>"
-                    . "<span href='#' class='btn btn-info btn-xs' onclick='BukaPage(\"slks/select/" . $slks->nip . "/" . $slks->id_slks . "/\")'>edit</i></span>"
-                    . "&nbsp;&nbsp;"
-                    . "<span href='#' class='btn btn-danger btn-xs' onclick='ConfirmDelete(\"" . $slks->id_slks . "\")'>hapus</i></span>"
-                    . "</td>";
-                    echo "</tr>";
+        <?php
+        $path = 'downloads/foto';
+        $file = get_file_name($this->uri->segment(3));
+        $filepath = base_url($path) . '/' . $file;
+
+        $is_file_exist = read_file($filepath);
+        ?>
+
+        <div class="col-md-3 col-lg-2">
+            <img src="<?= base_url($path) . '/' . ($is_file_exist ? str_replace(' ', '_', $file) . '?' . rand() : 'nofoto.jpg'); ?>" width="100%" class="img-rounded">
+        </div>
+        <div class="col-md-9 col-lg-10">
+            <table id="datatables" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Jenis</th>
+                        <th>Nomor SK</th>
+                        <th>Tanggal SK</th>
+                        <th width="15%">Aksi</th>
+                    </tr>
+                </thead>
+                <?php
+                if (!empty($data_slks)) {
+                    foreach ($data_slks as $slks) {
+                        echo "<tr>";
+                        echo "<td>" . $slks->masa_kerja . " tahun</td>";
+                        echo "<td>" . ($slks->no_sk == '' ? '-' : $slks->no_sk) . "</td>";
+                        echo "<td>" . $slks->tgl_sk . "</td>";
+                        echo "<td>"
+                        . "<span href='#' class='btn btn-info btn-xs' onclick='BukaPage(\"slks/select/" . $slks->nip . "/" . $slks->id_slks . "/\")'>edit</i></span>"
+                        . "&nbsp;&nbsp;"
+                        . "<span href='#' class='btn btn-danger btn-xs' onclick='ConfirmDelete(\"" . $slks->id_slks . "\")'>hapus</i></span>"
+                        . "</td>";
+                        echo "</tr>";
+                    }
                 }
-            }
-            ?>
-            <tbody>
+                ?>
+                <tbody>
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-
     <div class="panel-footer">
         <strong>&nbsp;</strong>
         <div class="pull-right">

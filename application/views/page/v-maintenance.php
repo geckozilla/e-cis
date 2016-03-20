@@ -1,3 +1,4 @@
+<?php require_once ('navigator.php'); ?>
 <div class="panel panel-default">
     <div class="panel-heading">
         <b><?= $header; ?></b>

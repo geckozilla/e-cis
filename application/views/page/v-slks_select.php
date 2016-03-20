@@ -68,8 +68,7 @@
     </div>
 </div>
 <script>
-    $("#date_awal").mask("9999-99-99", {placeholder: "_"});
-    $("#date_akhir").mask("9999-99-99", {placeholder: "_"});
+    $("#tgl_sk").mask("9999-99-99", {placeholder: "_"});
     $('#simpan').on('click', function(e) {
         e.preventDefault();
         $.ajax({

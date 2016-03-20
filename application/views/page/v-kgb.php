@@ -3,7 +3,7 @@
     <div class="panel-heading">
         <b><?= $header; ?></b>
         <div class="pull-right">
-            <a class="btn btn-default btn-xs" href="#" onclick="BukaPage('kgb/setting')"><i class="fa fa-gear "></i></a>
+            <a class="btn btn-default btn-xs" href="#" onclick="BukaPage('kgb/setting')"><i class="fa fa-gear "> Pengaturan KGB </i></a>
         </div>
     </div>
     <div class="panel-body">
@@ -11,13 +11,13 @@
         <table class="table table-bordered table-striped table-hover" id="mytable">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>NIP</th>
-                    <th>Nama</th>
-                    <th>Golongan</th>
+                    <th width="5%">No</th>
+                    <th width="10%">NIP</th>
+                    <th width="20%">Nama</th>
+                    <th width="10%">Golongan</th>
                     <th>Next KGB</th>
                     <th>MKG</th>
-                    <th>Action</th>
+                    <th width="10%">Action</th>
                 </tr>
             </thead>
         </table>

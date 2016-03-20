@@ -9,25 +9,10 @@
     <div class="panel-body"><?php
         if (!empty($data)) {
             $kgb = $data;
-            $golongan = array(
-                '11' => 'I/a',
-                '12' => 'I/b',
-                '13' => 'I/c',
-                '14' => 'II/d',
-                '21' => 'II/a',
-                '22' => 'II/b',
-                '23' => 'II/c',
-                '24' => 'II/d',
-                '31' => 'III/a',
-                '32' => 'III/b',
-                '33' => 'III/c',
-                '34' => 'III/d',
-                '41' => 'IV/a',
-                '42' => 'IV/b',
-                '43' => 'IV/c',
-                '44' => 'IV/d',
-                '45' => 'IV/e',
-            );
+            $golongan = array();
+            foreach ($data_golongan as $gol) {
+                $golongan[$gol->id_golongan] = $gol->golongan;
+            }
             ?>
 
             <form id="formku" role="form" action="#" method="post" autocomplete="off" >
@@ -148,7 +133,7 @@
                         <div class="form-group form-group-sm">
                             <label class="control-label col-sm-5">Nomor SK Baru :</label>
                             <div class="col-sm-7">
-                                <input class="form-control" style="color: red;" id="no_sk_baru" name="no_sk_baru" value="<?= $mode == 'edit' ? $kgb->no_sk_baru : ' Automatic'; ?>" disabled="">
+                                <input class="form-control" style="color: red;" id="no_sk_baru" name="no_sk_baru" value="<?= $mode == 'edit' ? $kgb->no_sk_baru : ' Automatic'; ?>" <?= $mode == 'tambah' ? 'disabled' : ''; ?>>
                             </div>
                         </div>
                         <div class="form-group form-group-sm">

@@ -8,7 +8,8 @@ class dashboard extends CI_Controller {
         parent::__construct();
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate");
         if (!$this->ion_auth->logged_in()) {
-            red('user/login');
+            red(base_url('user/login'));
+            die();
         }
     }
 
@@ -24,6 +25,7 @@ class dashboard extends CI_Controller {
         $data['persebaran_bagian'] = $this->model_dashboard->persebaran_bagian();
         $data['pegawai_pria'] = $this->model_dashboard->pegawai_pria();
         $data['pegawai_wanita'] = $this->model_dashboard->pegawai_wanita();
+        $data['pengumuman'] = $this->model_dashboard->pengumuman();
         $this->load->view('page/v-dashboard', $data);
     }
 

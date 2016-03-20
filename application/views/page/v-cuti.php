@@ -7,12 +7,12 @@
         <table class="table table-bordered table-striped table-hover" id="mytable">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>NIP</th>
-                    <th>Nama</th>
-                    <th>Golongan</th>
-                    <th>Sisa</th>
-                    <th>Action</th>
+                    <th width="5%">No</th>
+                    <th width="10%">NIP</th>
+                    <th width="20%">Nama</th>
+                    <th width="10%">Golongan</th>
+                    <th>Sisa Cuti</th>
+                    <th width="10%">Action</th>
                 </tr>
             </thead>
         </table>

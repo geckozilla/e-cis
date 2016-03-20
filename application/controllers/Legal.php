@@ -8,7 +8,8 @@ class Legal extends CI_Controller {
         parent::__construct();
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate");
         if (!$this->ion_auth->logged_in()) {
-            red('user/login');
+            red(base_url('user/login'));
+            die();
         }
     }
 

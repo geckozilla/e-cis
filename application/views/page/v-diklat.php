@@ -2,9 +2,6 @@
 <div class="panel panel-<?= $tema; ?>">
     <div class="panel-heading">
         <b><?= $header; ?></b>
-        <div class="pull-right">
-            <a class="btn btn-default btn-xs" href="#" onclick="BukaPage('kgb/setting')"><i class="fa fa-gear "></i></a>
-        </div>
     </div>
     <div class="panel-body">
 
@@ -12,12 +9,11 @@
             <thead>
                 <tr>
                     <th width="5%">No</th>
-                    <th width="15%">NIP</th>
-                    <th width="22%">Nama</th>
-                    <th width="7%">Gol</th>
-                    <th width="8%">Terakhir</th>
-                    <th width="12%">Jenis Diklat</th>
-                    <th width="21%">Nama Diklat</th>
+                    <th width="10%">NIP</th>
+                    <th width="20%">Nama</th>
+                    <th width="10%">Gol</th>
+                    <th width="5%">Terakhir Diklat</th>
+                    <th>Nama Diklat</th>
                     <th width="10%">Action</th>
                 </tr>
             </thead>
@@ -55,14 +51,13 @@
                 {"data": "nama"},
                 {"data": "gol_akhir"},
                 {"data": "last_diklat"},
-                {"data": "nama_jenis"},
                 {"data": "nama_diklat"},
                 {
                     "class": "text-center",
                     "data": "nip"
                 }
             ],
-            "order": [[3, 'desc']],
+            "order": [[4, 'desc']],
             "rowCallback": function(row, data, iDisplayIndex) {
                 var info = this.fnPagingInfo();
                 var page = info.iPage;

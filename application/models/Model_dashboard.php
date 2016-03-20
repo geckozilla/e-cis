@@ -109,4 +109,16 @@ class model_dashboard extends CI_Model {
         }
     }
 
+    function pengumuman() {
+        $this->db->where('nama_pengaturan', 'pengumuman');
+        $get = $this->db->get('pegawai_pengaturan');
+        //echo $this->db->last_query();
+        if ($get->num_rows() > 0) {
+            $result = $get->row();
+            return $result->value_pengaturan;
+        } else {
+            return false;
+        }
+    }
+
 }

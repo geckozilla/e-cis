@@ -7,8 +7,9 @@ class cuti extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate");
-        if (!$this->ion_auth->logged_in()) {
-            red('user');
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->in_group('cuti')) {
+            red(base_url('user/login'));
+            die();
         }
         if (empty($this->input->post('new_q'))) {
             $this->cek_periode();
@@ -36,7 +37,7 @@ class cuti extends CI_Controller {
                 array(
                     'db' => 'gol_akhir',
                     'dt' => 'gol',
-                    'formatter' => function( $d ) {
+                    'formatter' => function($d) {
                 return convert_golongan($d);
             }),
                 array('db' => 'sisa', 'dt' => 'sisa'),

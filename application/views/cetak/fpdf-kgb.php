@@ -50,6 +50,7 @@ foreach ($data_kgb as $kgb) {
     }
 
     $pdf = new PDF('P', 'mm', array(210, 330));
+    $pdf->SetTitle('Kenaikan Gaji Berkala');
     $pdf->AliasNbPages();
     $pdf->AddPage();
     $pdf->SetAutoPageBreak(0);

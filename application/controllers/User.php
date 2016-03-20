@@ -147,7 +147,7 @@ class user extends CI_Controller {
 
     public function view_user() {
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin() || !$this->input->is_ajax_request()) {
-            red('');
+            red('base');
         } else {
             $this->load->view('page/v-user');
         }

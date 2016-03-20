@@ -44,6 +44,19 @@ class Model_diklat extends CI_Model {
         }
     }
 
+    function select_jenis() {
+        $get = $this->db->get('pegawai_diklat_jenis');
+        //echo $this->db->last_query();
+        if ($get->num_rows() > 0) {
+            foreach ($get->result() as $result) {
+                $data[] = $result;
+            }
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
     function delete($id) {
         $this->db->where('id_diklat', $id);
         $query = $this->db->delete('pegawai_diklat');
@@ -63,7 +76,7 @@ class Model_diklat extends CI_Model {
             $id = $this->db->insert_id();
             //echo $this->db->last_query();
             if ($query) {
-                log_event('input diklat', 'id_diklat=' . $id);
+                log_event('input diklat', 'nip=' . $data['nip'] .' id_diklat=' . $id);
                 return $id;
             } else {
                 return 0;
@@ -75,8 +88,7 @@ class Model_diklat extends CI_Model {
             $query = $this->db->update('pegawai_diklat', $data);
             //echo $this->db->last_query();
             if ($query) {
-                log_event('edit diklat', 'id_diklat=' . $id);
-
+                log_event('edit diklat', 'nip=' . $data['nip'] .' id_diklat=' . $id);
                 return $id;
             } else {
                 return 0;

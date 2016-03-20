@@ -49,7 +49,7 @@ class model_kgb extends CI_Model {
         $query = $this->db->delete('pegawai_kgb');
         //echo $this->db->last_query();
         if ($query) {
-            log_event('hapus kgb', 'nip=' . $nip . ' id_kgb=' . $id);
+            log_event('hapus kgb', 'id_kgb=' . $id);
             return 1;
         } else {
             return 0;

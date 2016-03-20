@@ -8,8 +8,9 @@ class pegawai extends CI_Controller {
         parent::__construct();
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate");
         $this->load->helper(array('string', 'file'));
-        if (!$this->ion_auth->logged_in()) {
-            red('user/login');
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->in_group('pegawai')) {
+            red(base_url('user/login'));
+            die();
         }
     }
 
@@ -134,7 +135,9 @@ class pegawai extends CI_Controller {
 
     public function select() {
         $this->load->model('model_pegawai');
-        $datapeg = $this->model_pegawai->select($this->uri->segment(3));
+        $nip = $this->uri->segment(3);
+        $this->model_pegawai->match_gol($nip); //SESUAIKAN GOLONGAN DENGAN FUNGSI match_gol()
+        $datapeg = $this->model_pegawai->select($nip);
         //////////////////////////////////KEPERLUAN LOAD FOTO - MULAI
         @$file = $datapeg->nip . '_' . replace_filename($datapeg->nama) . '.jpg';
         $path = 'downloads/foto';
@@ -151,7 +154,7 @@ class pegawai extends CI_Controller {
         $data['filepath'] = $filepath;
         //////////////////////////////////KEPERLUAN LOAD FOTO - SELESAI
 
-        $data['data_kgb'] = $this->model_pegawai->next_kgb($this->uri->segment(3));
+        $data['data_kgb'] = $this->model_pegawai->next_kgb($nip);
 
         $this->load->model('model_bagian');
         $data['data_bagian'] = $this->model_bagian->view();

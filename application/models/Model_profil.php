@@ -19,6 +19,7 @@ class model_profil extends CI_Model {
         $query = $this->db->update('pegawai_admin', $data);
         //echo $this->db->last_query() . '<br/>';
         if ($query) {
+            log_event('update profil', '');
             return 1;
         } else {
             return 0;

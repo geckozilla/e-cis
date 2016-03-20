@@ -14,6 +14,12 @@ if ($modul == 'pegawai') {
     $submodul = 'view';
 } elseif ($modul == 'diklat') {
     $submodul = 'view';
+} elseif ($modul == 'kp') {
+    $submodul = 'view';
+} elseif ($modul == 'jabatan') {
+    $submodul = 'view';
+} elseif ($modul == 'pendidikan') {
+    $submodul = 'view';
 } else {
     $modul = 'pegawai';
     $submodul = 'select';
@@ -81,16 +87,32 @@ $modul = $this->uri->segment(1);
     <div class="col-lg-12">
         <form class="form-inline pull-left" id="cari_nip">
             <div class="form-group">
-                <input type="text" style="width:200px;" id="carinip" value="<?= $nip; ?>"class="form-control input-sm" placeholder="Cari . . .">
+                <input type="text" style="width:200px;" id="carinip" value="<?= $nip; ?>"class="form-control input-sm" placeholder="Cari NIP/Nama . . .">
             </div>
+            <input class="form-control input-sm" style="width:300px;" value="<?= get_name_by_nip($nip); ?>" disabled/>
+
         </form>
 
         <div class="btn-group btn-group-sm pull-right">
-            <a type="button" class="btn btn-primary btn-default <?= $modul == 'pegawai' ? 'active' : ''; ?>" onclick="BukaPage('<?= $aksi == '' ? 'pegawai' : 'pegawai/select/' . $nip; ?>')" >Pegawai</a>
-            <a type="button" class="btn btn-primary <?= $modul == 'kgb' ? 'active' : ''; ?>" onclick="BukaPage('<?= $aksi == '' ? 'kgb' : 'kgb/view/' . $nip; ?>')" >KGB</a>
-            <a type="button" class="btn btn-primary <?= $modul == 'cuti' ? 'active' : ''; ?>" onclick="BukaPage('<?= $aksi == '' ? 'cuti' : 'cuti/view/' . $nip; ?>')" >Cuti</a>
-            <a type="button" class="btn btn-primary <?= $modul == 'slks' ? 'active' : ''; ?>" onclick="BukaPage('<?= $aksi == '' ? 'slks' : 'slks/view/' . $nip; ?>')" >SLKS</a>
-            <a type="button" class="btn btn-primary <?= $modul == 'diklat' ? 'active' : ''; ?>" onclick="BukaPage('<?= $aksi == '' ? 'diklat' : 'diklat/view/' . $nip; ?>')" >Diklat</a>
+
+            <?php if (true) { ?>
+            <?php } if ($this->ion_auth->in_group('pegawai')) { ?>
+                <a type="button" class="btn btn-primary <?= $modul == 'pegawai' ? 'active' : ''; ?>" onclick="BukaPage('<?= $aksi == '' ? 'pegawai' : 'pegawai/select/' . $nip; ?>')" >Pegawai</a>
+            <?php } if ($this->ion_auth->in_group('kgb')) { ?>
+                <a type="button" class="btn btn-primary <?= $modul == 'kgb' ? 'active' : ''; ?>" onclick="BukaPage('<?= $aksi == '' ? 'kgb' : 'kgb/view/' . $nip; ?>')" >KGB</a>
+            <?php } if ($this->ion_auth->in_group('cuti')) { ?>
+                <a type="button" class="btn btn-primary <?= $modul == 'cuti' ? 'active' : ''; ?>" onclick="BukaPage('<?= $aksi == '' ? 'cuti' : 'cuti/view/' . $nip; ?>')" >Cuti</a>
+            <?php } if ($this->ion_auth->in_group('slks')) { ?>
+                <a type="button" class="btn btn-primary <?= $modul == 'slks' ? 'active' : ''; ?>" onclick="BukaPage('<?= $aksi == '' ? 'slks' : 'slks/view/' . $nip; ?>')" >SLKS</a>
+            <?php } if ($this->ion_auth->in_group('diklat')) { ?>
+                <a type="button" class="btn btn-primary <?= $modul == 'diklat' ? 'active' : ''; ?>" onclick="BukaPage('<?= $aksi == '' ? 'diklat' : 'diklat/view/' . $nip; ?>')" >Diklat</a>
+            <?php } if ($this->ion_auth->in_group('kp')) { ?>
+                <a type="button" class="btn btn-primary <?= $modul == 'kp' ? 'active' : ''; ?>" onclick="BukaPage('<?= $aksi == '' ? 'kp' : 'kp/view/' . $nip; ?>')" >KP</a>
+            <?php } if ($this->ion_auth->in_group('jabatan')) { ?>
+                <a type="button" class="btn btn-primary <?= $modul == 'jabatan' ? 'active' : ''; ?>" onclick="BukaPage('<?= $aksi == '' ? 'jabatan' : 'jabatan/view/' . $nip; ?>')" >Jabatan</a>
+            <?php } if ($this->ion_auth->in_group('pendidikan')) { ?>
+                <a type="button" class="btn btn-primary <?= $modul == 'pendidikan' ? 'active' : ''; ?>" onclick="BukaPage('<?= $aksi == '' ? 'pendidikan' : 'pendidikan/view/' . $nip; ?>')" >Pendidikan</a>
+            <?php } ?>
         </div>
     </div>
     <br>

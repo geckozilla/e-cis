@@ -79,7 +79,7 @@ class model_slks extends CI_Model {
             $id = $this->db->insert_id();
             //echo $this->db->last_query();
             if ($query) {
-                log_event('input slks', 'id_slks=' . $id);
+                log_event('input slks', 'nip=' . $data['nip'] . ' id_slks=' . $id);
                 return $id;
             } else {
                 return 0;
@@ -91,7 +91,7 @@ class model_slks extends CI_Model {
             $query = $this->db->update('pegawai_slks', $data);
             //echo $this->db->last_query();
             if ($query) {
-                log_event('edit slks', 'id_slks=' . $id);
+                log_event('edit slks', 'nip=' . $data['nip'] . ' id_slks=' . $id);
 
                 return $id;
             } else {

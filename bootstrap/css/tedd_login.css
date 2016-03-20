@@ -77,7 +77,7 @@ body{
     background:#333;
     color:#fff;
     font-size: 9px;
-    position:absolute;
+    position:fixed;
     bottom:0px;
 }
 

@@ -104,7 +104,7 @@
                 $.notify('Data telah disimpan', {
                     className: 'success',
                 });
-                //$(".isi").load("<?= base_url('cuti/select/' . $this->uri->segment(3)); ?>/" + responseData);
+                BukaPage('cuti/view/' + $('#nip').val());
             },
             error: function(responseData) {
                 console.log('Ajax request not recieved!');

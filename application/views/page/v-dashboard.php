@@ -7,7 +7,7 @@
 
         <div class="col-lg-12 col-md-12 placeholder">
             <div class="alert alert-info alert-dismissable text-center">
-                <h4>Modul <a href="#" onclick="BukaPage('diklat')" style="color:red" >Diklat</a> telah berhasil ditambahkan. Silakan lakukan uji coba serta lengkapi datanya.</h4>
+                <h4><?= $pengumuman; ?></h4>
             </div>
 
         </div>

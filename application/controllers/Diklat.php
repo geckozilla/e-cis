@@ -7,8 +7,9 @@ class Diklat extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate");
-        if (!$this->ion_auth->logged_in()) {
-            red('user/login');
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->in_group('diklat')) {
+            red(base_url('user/login'));
+            die();
         }
     }
 
@@ -41,7 +42,6 @@ class Diklat extends CI_Controller {
             }
                 ),
                 array('db' => 'last_diklat', 'dt' => 'last_diklat'),
-                array('db' => 'nama_jenis', 'dt' => 'nama_jenis'),
                 array('db' => 'nama_diklat', 'dt' => 'nama_diklat'),
             );
 
@@ -66,7 +66,7 @@ class Diklat extends CI_Controller {
 
     public function view() {
         $this->load->model('model_diklat');
-        $data['header'] = 'SLKS';
+        $data['header'] = 'Diklat';
         $data['tema'] = 'primary';
         $data['data_diklat'] = $this->model_diklat->view($this->uri->segment(3));
         $this->load->view('page/v-diklat_view', $data);
@@ -90,8 +90,9 @@ class Diklat extends CI_Controller {
     public function select() {
         $this->load->model('model_diklat');
         $id = $this->uri->segment(4);
-        $data['header'] = 'Tambah Data SLKS';
+        $data['header'] = 'Tambah Data Diklat';
         $data['tema'] = 'primary';
+        $data['data_jenis'] = $this->model_diklat->select_jenis();
         if ($id > 0) {
             $data['data'] = $this->model_diklat->select($id);
             $data['mode'] = 'edit';

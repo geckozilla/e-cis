@@ -41,6 +41,7 @@ $lampiran = '-';
 $perihal = 'Kenaikan Gaji Berkala';
 $kota = 'Banjarbaru';
 
+$pdf->SetTitle('Biodata');
 $pdf->SetFont('Times', 'B', 12);
 $pdf->Cell(0, 0, 'BIODATA PEGAWAI', 0, 0, 'C');
 $pdf->Ln(0);
@@ -73,7 +74,7 @@ $pdf->Ln(0);
 
 $pdf->Cell(5);
 $pdf->Cell(30, 50, 'Jabatan', 0, 0, 'L');
-$pdf->Cell(1, 50, ': ' . ucwords_strtolower($data->nama_jab), 0, 0, 'L');
+$pdf->Cell(1, 50, ': ' . strtoupper($data->nama_jab), 0, 0, 'L');
 $pdf->Ln(0);
 
 $pdf->Cell(5);
@@ -82,6 +83,6 @@ $pdf->Cell(1, 60, ': ' . $data->nama_bag, 0, 0, 'L');
 $pdf->Ln(0);
 
 
-$nama_file = $data->nip . '_' . $data->nama  . '.pdf';
+$nama_file = $data->nip . '_' . $data->nama . '.pdf';
 $pdf->Output($nama_file, 'I');
 ?>

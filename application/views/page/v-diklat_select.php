@@ -24,11 +24,10 @@
             $keterangan = '';
         }
 
-        $list_jenis = array(
-            '1' => 'Teknis',
-            '2' => 'Kepemimpinan',
-            '3' => 'Manajemen',
-        );
+        $list_jenis = array();
+        foreach ($data_jenis as $j) {
+            $list_jenis[$j->id_jenis] = $j->nama_jenis;
+        }
         ?>
 
         <form id="formku" role="form" action="#" method="post" autocomplete="off" >
@@ -53,13 +52,13 @@
                         </div>
                     </div>
                     <div class="form-group form-group-sm">
-                        <label class="control-label col-sm-5">Nama :</label>
+                        <label class="control-label col-sm-5">Nama Diklat :</label>
                         <div class="col-sm-7">
                             <input class="form-control" id="kuantitas" name="nama_diklat" value="<?= $nama_diklat; ?>">
                         </div>
                     </div>
                     <div class="form-group form-group-sm">
-                        <label class="control-label col-sm-5">Jam :</label>
+                        <label class="control-label col-sm-5">Jam Pelajaran :</label>
                         <div class="col-sm-7">
                             <input class="form-control" class="form-control" name="jam_diklat" value="<?= $jam_diklat; ?>" />
                         </div>
@@ -97,7 +96,7 @@
                 $.notify('Data telah disimpan', {
                     className: 'success',
                 });
-                //$(".isi").load("<?= base_url('diklat/select/' . $this->uri->segment(3)); ?>/" + responseData);
+                $(".isi").load("<?= base_url('diklat/view/' . $this->uri->segment(3)); ?>/" + responseData);
             },
             error: function(responseData) {
                 console.log('Ajax request not recieved!');

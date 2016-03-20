@@ -2,9 +2,6 @@
 <div class="panel panel-<?= $tema; ?>">
     <div class="panel-heading">
         <b><?= $header; ?></b>
-        <div class="pull-right">
-            <a class="btn btn-default btn-xs" href="#" onclick="BukaPage('kgb/setting')"><i class="fa fa-gear "></i></a>
-        </div>
     </div>
     <div class="panel-body">
 
@@ -12,11 +9,11 @@
             <thead>
                 <tr>
                     <th width="5%">No</th>
-                    <th width="15%">NIP</th>
-                    <th width="35%">Nama</th>
-                    <th width="15%">Golongan</th>
-                    <th width="15%">Masa Kerja</th>
-                    <th width="15%">Action</th>
+                    <th width="10%">NIP</th>
+                    <th width="20%">Nama</th>
+                    <th width="10%">Golongan</th>
+                    <th>Masa Kerja</th>
+                    <th width="10%">Action</th>
                 </tr>
             </thead>
         </table>

@@ -3,7 +3,6 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-
 function convert_pangkat($input) {
     $CI = & get_instance();
     $CI->db->select('pangkat');
@@ -74,8 +73,34 @@ function convert_golongan($input) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////// KGB
-function hitung_mks($tmt_cpns, $tgl_hitung = 'now', $pmk_thn = 0, $pmk_bln = 0, $tgl_pmk = null) { //menghitung masa kerja seluruhnya
-    $x_date = strtotime($tmt_cpns);
+function hitung_mk($tmt_awal, $tgl_hitung = 'now') {
+    $x_date = strtotime($tmt_awal);
+    if (strtolower($tgl_hitung) == 'now' || $tgl_hitung == '') {
+        $y_date = strtotime('now');
+    } else {
+        $y_date = strtotime($tgl_hitung);
+    }
+
+    $thn_awal = date('Y', $x_date);
+    $thn_akhir = date('Y', $y_date);
+    $bln_awal = date('m', $x_date);
+    $bln_akhir = date('m', $y_date);
+    $thn_tot = ($thn_akhir - $thn_awal);
+    $bln_tot = ($bln_akhir - $bln_awal);
+
+    if ($bln_tot > 11) {
+        $thn_tot+=1;
+        $bln_tot-=12;
+    } else if ($bln_tot < 0) {
+        $thn_tot-=1;
+        $bln_tot+=12;
+    }
+    $data = (object) array('tahun' => $thn_tot, 'bulan' => $bln_tot);
+    return $data;
+}
+
+function hitung_mks($tmt_awal, $tgl_hitung = 'now', $pmk_thn = 0, $pmk_bln = 0, $tgl_pmk = null) { //menghitung masa kerja seluruhnya
+    $x_date = strtotime($tmt_awal);
     if (strtolower($tgl_hitung) == 'now' || $tgl_hitung == '') {
         $y_date = strtotime('now');
     } else {
@@ -121,7 +146,7 @@ function hitung_mkg($gol_awal, $gol_akhir, $mks) { //menghitung masa kerja golon
             (substr($gol_akhir, 0, 1) == 3 || substr($gol_akhir, 0, 1) == 4)) { //AWAL GOL 2 & AKHIR (GOL III / IV)
         $tahun-=5;
     }
-    $data = (object) array('tahun' => $tahun, 'bulan' => $bulan); 
+    $data = (object) array('tahun' => $tahun, 'bulan' => $bulan);
     return $data;
 }
 
@@ -358,6 +383,36 @@ function split_nip($nip) {
     $nip = preg_replace('/^.{15}/', "$0 ", $nip);
     $nip = preg_replace('/^.{17}/', "$0 ", $nip);
     return $nip;
+}
+
+function get_name_by_nip($nip) {
+    $CI = & get_instance();
+    $CI->db->select('nama');
+    $CI->db->where('nip', $nip);
+    $get = $CI->db->get('pegawai_pegawai');
+
+    if ($get->num_rows() > 0) {
+        $data = $get->row();
+        return $data->nama;
+    } else {
+        return false;
+    }
+}
+
+function get_file_name($nip) {
+    $CI = & get_instance();
+    $CI->db->select('nama');
+    $CI->db->where('nip', $nip);
+    $get = $CI->db->get('pegawai_pegawai');
+
+    if ($get->num_rows() > 0) {
+        $data = $get->row();
+        $file = $nip . '_' . replace_filename($data->nama) . '.jpg';
+
+        return $file;
+    } else {
+        return false;
+    }
 }
 
 ?>

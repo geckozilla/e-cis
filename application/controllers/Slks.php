@@ -7,8 +7,9 @@ class Slks extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate");
-        if (!$this->ion_auth->logged_in()) {
-            red('user/login');
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->in_group('slks')) {
+            red(base_url('user/login'));
+            die();
         }
     }
 
